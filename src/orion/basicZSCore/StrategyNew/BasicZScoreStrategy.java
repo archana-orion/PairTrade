@@ -25,7 +25,7 @@ public class BasicZScoreStrategy {
 
 	private static final int MAX_TRADES_IN_PAIR_THRESHOLD = 9;
 	private static final int MAX_TRADES_IN_PAIR_PER_DAY = 3;
-	private static final int MAX_HOLDING_DAY    = 8;
+	private static final int MAX_HOLDING_DAY    = 1000;
 
 	private static final double DIFF_TO_ENTER_NEXT_TRADE = 0.5;
 	private static final double ENTRY_ZSCORE = -1.5;
@@ -41,7 +41,7 @@ public class BasicZScoreStrategy {
 	
 	private final Map<StockPair,List<PairTrade>> openPairTradesByPair = new HashMap<StockPair,List<PairTrade>>();
 	private final Map<Date,Map<StockPair,Integer>> numberOfTradesByPairByDate = new HashMap<>();
-
+	
 	private static final String OLD_PAIRS = "C:\\Users\\ARCHANA\\Pairs_Data-20190311T120701Z-001\\Pairs_Data\\Pairs.txt";
 	
 	private static SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyyMMdd|HH:mm:ss");
@@ -78,7 +78,7 @@ public void runBackTest(Date startDate, Date endDate) throws Exception {
 		for(StockPair pair:oldPairs) {
 			
 				
-			//if( ! pair.toString().equals("[AET|CNC]")){ continue; }
+			if( ! pair.toString().equals("[AET|CNC]")){ continue; }
 				 
 			//System.out.println( "valueof i " +i);
 			Asset longAsset = pair.getLongAsset();
@@ -298,8 +298,7 @@ private boolean tryToCloseOpenTrades(Asset longAsset, Asset shortAsset, OHLCData
 				pairTrade.setDayThreeReturn(dayThreeReturn);
 				
 					if(dayFourReturn>dayThreeReturn) {
-						pairTrade.setReturns(netReturns);
-						closePairTrade(pairTrade, longAsset, shortAsset, ohlcLong, ohlcShort,ZScoreCurrentPair);
+						pairTrade.setReturns(netReturns);						closePairTrade(pairTrade, longAsset, shortAsset, ohlcLong, ohlcShort,ZScoreCurrentPair);
 						avrageReturn.add(pairTrade.getReturns());
 						pairTrade.setReasonOfClosingTrade("Fourth Day Return is greater than Third Day Return");
 						closedAnyTrade = true;

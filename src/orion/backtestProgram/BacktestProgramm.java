@@ -27,6 +27,7 @@ public class BacktestProgramm {
 	public static String FUTURE_lIST_filepath = "C:\\Users\\ARCHANA\\Pairs_Data-20190311T120701Z-001\\Pairs_Data\\Futures_list-OldPairs.txt";
 	public static String ASSET_MINUT_DATA_LOCATION = "C:\\Users\\ARCHANA\\Pairs_Data-20190311T120701Z-001\\Pairs_Data\\MinuteData-OldPairs-ClosePrices.txt";
 	public static String ASSET_EOD_DATA_LOCATION = "C:\\Users\\ARCHANA\\Pairs_Data-20190311T120701Z-001\\Pairs_Data\\EodData-OldPairs-ClosePrices.txt";
+	public static String SPY_MINUT_DATA_LOCATION = "C:\\Users\\ARCHANA\\Pairs-Data\\SPYIndexData.txt";
 	
 	public static void main(String[] args) throws Exception{
 		System.out.println("Welcome to new Back Testing programm");
@@ -38,8 +39,8 @@ public class BacktestProgramm {
 	private static void basicZScoreStrategy() throws ParseException, Exception {
 		System.out.println("This is Basic Z Score Stategy");
 		
-		Date startDate = dateFormat.parse("20160103");
-		Date endDate = dateFormat.parse("20181010");
+		Date startDate = dateFormat.parse("20160303");
+		Date endDate = dateFormat.parse("20160630");
 		
 		//Data Loading
 		Map<Date,Map<Asset,List<OHLCData>>> ohlcListByAssetByTime = DataLoader.loadDataFromFile(FUTURE_lIST_filepath,ASSET_MINUT_DATA_LOCATION,startDate, endDate);
